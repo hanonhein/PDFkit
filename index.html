@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF Kit Online – Free PDF tools, private in your browser</title>
+<meta name="description" content="Merge, split, compress, reorder, watermark and number PDF pages. Free, no limits, no sign-up. Your files never leave your device.">
+<link rel="icon" href="assets/pdfkit-icon.png">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#" aria-label="PDF Kit home">
+    <img src="assets/pdfkit-icon.png" alt="" width="32" height="32">
+    <span>PDF Kit</span>
+  </a>
+  <nav>
+    <a href="#" class="nav-link">All tools</a>
+    <a href="privacy.html" class="nav-link">Privacy</a>
+    <a href="#app" class="btn small">Get the Android app</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME: tool grid -->
+  <section id="home">
+    <div class="hero">
+      <h1>Free PDF tools that <span>stay on your device</span></h1>
+      <p>Merge, split, compress and more. No sign-up, no daily limit, no uploads.</p>
+      <p class="privacy-badge">&#128274; Your files never leave your browser</p>
+    </div>
+    <div id="grid" class="grid"></div>
+
+    <div id="app" class="app-promo">
+      <h2>Prefer your phone?</h2>
+      <p>PDF Kit for Android also edits, signs, scans and converts. Coming soon to Google Play.</p>
+    </div>
+  </section>
+
+  <!-- TOOL view -->
+  <section id="tool" hidden>
+    <a href="#" class="back">&larr; All tools</a>
+    <h1 id="tool-title"></h1>
+    <p id="tool-desc" class="muted"></p>
+
+    <label id="drop" class="drop" tabindex="0">
+      <input id="file-input" type="file" hidden>
+      <strong id="drop-text">Choose files</strong>
+      <span>or drop them here</span>
+    </label>
+
+    <ul id="file-list" class="file-list"></ul>
+    <div id="pages" class="pages"></div>
+    <div id="options" class="options"></div>
+
+    <button id="run" class="btn big" disabled>Go</button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <div id="results" class="results"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Made to run privately in your browser.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="convert.js?v=5"></script>
+<script src="app.js?v=5"></script>
+</body>
+</html>
