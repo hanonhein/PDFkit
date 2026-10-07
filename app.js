@@ -3,7 +3,7 @@
 
 const { PDFDocument, StandardFonts, rgb, degrees } = PDFLib;
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  "vendor/pdf.worker.min.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -36,7 +36,7 @@ async function openPdfLib(file) {
 
 async function openPdfJs(file) {
   const data = new Uint8Array(await readBuffer(file));
-  return pdfjsLib.getDocument({ data }).promise;
+  return pdfjsLib.getDocument({ data, isEvalSupported: false }).promise;
 }
 
 async function renderPage(pdf, pageNumber, scale) {

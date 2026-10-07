@@ -136,11 +136,44 @@ async function buildXlsx(pages) {
 
 // ---------- HTML -> PDF (used by Word and Excel) ----------
 
+// Word and Excel files turn into HTML before they are drawn. A bad file could hide code in that HTML,
+// so only plain document tags and a few safe attributes are kept (everything else is removed).
+const SAFE_TAGS = new Set(["A", "B", "BLOCKQUOTE", "BR", "CAPTION", "CODE", "COL", "COLGROUP", "DEL", "DIV", "EM", "H1", "H2", "H3", "H4", "H5", "H6",
+  "HR", "I", "IMG", "INS", "LI", "OL", "P", "PRE", "S", "SMALL", "SPAN", "STRIKE", "STRONG", "SUB", "SUP", "TABLE", "TBODY", "TD", "TFOOT", "TH",
+  "THEAD", "TR", "U", "UL"]);
+const DROP_TAGS = new Set(["SCRIPT", "STYLE", "IFRAME", "FRAME", "FRAMESET", "OBJECT", "EMBED", "LINK", "META", "BASE", "FORM", "INPUT", "BUTTON",
+  "TEXTAREA", "SELECT", "SVG", "MATH", "TEMPLATE", "NOSCRIPT", "AUDIO", "VIDEO", "SOURCE", "CANVAS", "APPLET"]);
+const SAFE_ATTRS = new Set(["colspan", "rowspan", "align", "valign", "alt", "width", "height"]);
+
+function cleanHtmlInto(parent, html) {
+  const doc = new DOMParser().parseFromString("<!doctype html><body>" + html, "text/html");
+  const walk = (src, dest) => {
+    Array.from(src.childNodes).forEach((n) => {
+      if (n.nodeType === 3) { dest.appendChild(document.createTextNode(n.nodeValue)); return; }
+      if (n.nodeType !== 1) return;
+      const tag = n.nodeName.toUpperCase();
+      if (DROP_TAGS.has(tag)) return;
+      if (!SAFE_TAGS.has(tag)) { walk(n, dest); return; } // unknown tag: keep its text, drop the tag
+      const el = document.createElement(tag.toLowerCase());
+      Array.from(n.attributes).forEach((at) => {
+        const name = at.name.toLowerCase();
+        const val = at.value;
+        if (SAFE_ATTRS.has(name)) el.setAttribute(name, val);
+        else if (tag === "IMG" && name === "src" && /^data:image\/(png|jpe?g|gif|bmp|webp);base64,/i.test(val)) el.setAttribute("src", val);
+        else if (tag === "A" && name === "href" && /^(https?:|mailto:|#)/i.test(val)) el.setAttribute("href", val);
+      });
+      walk(n, el);
+      dest.appendChild(el);
+    });
+  };
+  walk(doc.body, parent);
+}
+
 function makeRenderBox(html, widthPx, cssClass) {
   const box = document.createElement("div");
   box.className = "render-box " + cssClass;
   box.style.width = widthPx + "px";
-  box.innerHTML = html;
+  cleanHtmlInto(box, html);
   const hold = document.createElement("div");
   hold.className = "render-hold";
   hold.appendChild(box);

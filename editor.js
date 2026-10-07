@@ -164,7 +164,7 @@ async function startEditor(tool, file) {
   let pdf;
   try {
     bytes = new Uint8Array(await file.arrayBuffer());
-    pdf = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+    pdf = await pdfjsLib.getDocument({ data: bytes.slice(), isEvalSupported: false }).promise;
   } catch (e) {
     const locked = e && e.name === "PasswordException";
     setStatus(locked ? file.name + " is password protected. Use Remove password first, then edit the unlocked file." : file.name + " could not be read. Is it a valid PDF?", true);
