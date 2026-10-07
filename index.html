@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PDF Kit Online – Free PDF tools, private in your browser</title>
+<title>PDF Editor Kit – Free PDF tools, private in your browser</title>
 <meta name="description" content="Merge, split, compress, reorder, watermark and number PDF pages. Free, no limits, no sign-up. Your files never leave your device.">
 <link rel="icon" href="pdfkit-icon.png">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="#" aria-label="PDF Kit home">
+  <a class="brand" href="#" aria-label="PDF Editor Kit home">
     <img src="pdfkit-icon.png" alt="" width="32" height="32">
-    <span>PDF Kit</span>
+    <span>PDF Editor Kit</span>
   </a>
   <nav>
     <a href="#" class="nav-link">All tools</a>
     <a href="privacy.html" class="nav-link">Privacy</a>
-    <a href="#app" class="btn small">Get the Android app</a>
+    <a href="download.html" class="btn small">Download</a>
   </nav>
 </header>
 
@@ -25,15 +25,19 @@
   <!-- HOME: tool grid -->
   <section id="home">
     <div class="hero">
-      <h1>Free PDF tools that <span>stay on your device</span></h1>
-      <p>Merge, split, compress and more. No sign-up, no daily limit, no uploads.</p>
-      <p class="privacy-badge">&#128274; Your files never leave your browser</p>
+      <img src="pdfkit-icon.png" alt="" width="48" height="48">
+      <div>
+        <h1>PDF Editor Kit</h1>
+        <p>What would you like to do today?</p>
+      </div>
     </div>
+    <p class="privacy-badge">&#128274; Free, no sign-up. Your files never leave your browser.</p>
     <div id="grid" class="grid"></div>
 
     <div id="app" class="app-promo">
-      <h2>Prefer your phone?</h2>
-      <p>PDF Kit for Android also edits, signs, scans and converts. Coming soon to Google Play.</p>
+      <h2>Prefer an app?</h2>
+      <p>PDF Editor Kit for Android, Windows and Mac also edits, signs, scans and converts.</p>
+      <p><a href="download.html" class="btn small" style="margin-top:12px">See downloads</a></p>
     </div>
   </section>
 
@@ -50,6 +54,7 @@
     </label>
 
     <ul id="file-list" class="file-list"></ul>
+    <div id="editor" class="editor" hidden></div>
     <div id="pages" class="pages"></div>
     <div id="options" class="options"></div>
 
@@ -60,10 +65,10 @@
 </main>
 
 <footer>
-  <p>Made to run privately in your browser.</p>
+  <p>Made to run privately in your browser. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="download.html">Download</a></p>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="vendor/pdf-lib.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
@@ -71,7 +76,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
-<script src="convert.js?v=5"></script>
-<script src="app.js?v=5"></script>
+<script src="convert.js?v=7"></script>
+<script src="editor.js?v=5"></script>
+<script src="security.js?v=1"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>

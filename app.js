@@ -1,5 +1,5 @@
 "use strict";
-// PDF Kit Online: every tool runs in the browser. Nothing is uploaded.
+// PDF Editor Kit: every tool runs in the browser. Nothing is uploaded.
 
 const { PDFDocument, StandardFonts, rgb, degrees } = PDFLib;
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -473,8 +473,14 @@ const tools = [
   },
   {
     id: "pdf2img", group: "Convert from PDF", title: "PDF to images", icon: "&#127912;", color: "teal", accept: ".pdf,application/pdf",
-    desc: "Save every page as a picture (PNG).",
+    desc: "Save every page as a picture. Choose PNG or JPG.",
     options: `
+      <label>Picture type
+        <select id="o-format">
+          <option value="png">PNG (best quality, bigger files)</option>
+          <option value="jpg">JPG (smaller files)</option>
+        </select>
+      </label>
       <label>Sharpness
         <select id="o-scale">
           <option value="1.5">Normal</option>
@@ -484,11 +490,15 @@ const tools = [
     async run(files, ctx) {
       const pdf = await openPdfJs(files[0]);
       const scale = parseFloat($("o-scale").value);
+      const jpg = $("o-format").value === "jpg";
       const base = baseName(files[0].name);
       const out = [];
       for (let i = 1; i <= pdf.numPages; i++) {
         const canvas = await renderPage(pdf, i, scale);
-        out.push({ name: base + "-page-" + i + ".png", blob: await canvasToBlob(canvas, "image/png") });
+        out.push({
+          name: base + "-page-" + i + (jpg ? ".jpg" : ".png"),
+          blob: jpg ? await canvasToBlob(canvas, "image/jpeg", 0.92) : await canvasToBlob(canvas, "image/png"),
+        });
         ctx.progress(i / pdf.numPages);
       }
       if (out.length === 1) return out;
@@ -498,26 +508,84 @@ const tools = [
 ];
 
 tools.push(...convertTools);
-const GROUP_ORDER = ["Edit & organize", "Convert from PDF", "Convert to PDF"];
+tools.push(...securityTools);
+tools.unshift(...editorTools);
+const GROUP_ORDER = ["Edit & organize", "Security", "Convert from PDF", "Convert to PDF"];
 
 // ---------- screen: home grid ----------
 
+// Simple line icons (24x24), the same idea as the icons in the Mac and Android apps
+const ICONS = {
+  sign: '<path d="M3 17c2-5 4-9 6-9 2 0 .5 6 2.5 6s2-4 4-4 1 4 3 4"/><path d="M3 21h18"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  unlock: '<rect x="5" y="11" width="14" height="9" rx="2.2"/><path d="M8 11V8a4 4 0 0 1 7.6-1.7"/>',
+  pencil: '<path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/>',
+  merge: '<path d="M12 3v8"/><path d="M9 6l3-3 3 3"/><path d="M12 11l-6 10"/><path d="M12 11l6 10"/>',
+  split: '<path d="M12 21v-8"/><path d="M12 13L6 4"/><path d="M12 13l6-9"/><path d="M6 8V4h4"/><path d="M18 8V4h-4"/>',
+  organize: '<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>',
+  compress: '<path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M10 14l-7 7"/><path d="M14 10l7-7"/>',
+  numbers: '<path d="M10 6h11"/><path d="M10 12h11"/><path d="M10 18h11"/><path d="M4 5.5l1.5-1v5"/><path d="M4 14h3l-3 3h3"/>',
+  watermark: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  image: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 9"/>',
+  word: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6"/><path d="M10 17h6"/>',
+  excel: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18"/><path d="M3 15h18"/><path d="M9 4v16"/>',
+  ppt: '<rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M12 16v4"/><path d="M8 20h8"/>'
+};
+const TOOL_LOOK = {
+  sign:     { icon: "sign",      color: "orange", sub: "Add your signature" },
+  protect:  { icon: "lock",      color: "orange", sub: "Add a password" },
+  unlock:   { icon: "unlock",    color: "orange", sub: "When you know it" },
+  edit:     { icon: "pencil",    color: "orange", sub: "Draw, highlight, text" },
+  merge:    { icon: "merge",     color: "teal",   sub: "Combine into one" },
+  split:    { icon: "split",     color: "orange", sub: "Cut into parts" },
+  organize: { icon: "organize",  color: "blue",   sub: "Rotate, sort, delete" },
+  compress: { icon: "compress",  color: "teal",   sub: "Make the file smaller" },
+  numbers:  { icon: "numbers",   color: "teal",   sub: "Number every page" },
+  watermark:{ icon: "watermark", color: "blue",   sub: "Text on every page" },
+  img2pdf:  { icon: "image",     color: "teal",   sub: "Pictures into one PDF" },
+  pdf2img:  { icon: "image",     color: "orange", sub: "Save pages as pictures" },
+  pdf2word: { icon: "word",      color: "blue",   sub: "Editable .docx file" },
+  pdf2excel:{ icon: "excel",     color: "teal",   sub: "Tables into .xlsx" },
+  pdf2ppt:  { icon: "ppt",       color: "orange", sub: "One slide per page" },
+  word2pdf: { icon: "word",      color: "blue",   sub: ".docx to PDF" },
+  excel2pdf:{ icon: "excel",     color: "teal",   sub: ".xlsx to PDF" },
+  ppt2pdf:  { icon: "ppt",       color: "orange", sub: ".pptx to PDF" }
+};
+
+function lookOf(t) {
+  const l = TOOL_LOOK[t.id] || {};
+  return {
+    color: l.color || t.color,
+    sub: l.sub || t.desc.split(/\.\s/)[0].replace(/\.$/, ""),
+    svg: l.icon && ICONS[l.icon]
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONS[l.icon] + "</svg>"
+      : t.icon
+  };
+}
+
 function buildGrid() {
   const grid = $("grid");
+  // Every tool is a big tile (like the Mac app home screen), grouped under a small heading
   GROUP_ORDER.forEach((group) => {
+    const groupTools = tools.filter((t) => t.group === group);
+    if (!groupTools.length) return;
     const h = document.createElement("h2");
     h.className = "group-title";
     h.textContent = group;
     grid.appendChild(h);
-    tools.filter((t) => t.group === group).forEach((t) => {
+    const tiles = document.createElement("div");
+    tiles.className = "tiles";
+    groupTools.forEach((t) => {
+      const look = lookOf(t);
       const a = document.createElement("a");
       a.className = "card";
       a.href = "#" + t.id;
-      a.innerHTML = '<div class="ico ' + t.color + '">' + t.icon + "</div><h3></h3><p></p>";
+      a.innerHTML = '<div class="ico ' + look.color + '">' + look.svg + "</div><div><h3></h3><p></p></div>";
       a.querySelector("h3").textContent = t.title;
-      a.querySelector("p").textContent = t.desc.split(/\.\s/)[0].replace(/\.$/, "") + ".";
-      grid.appendChild(a);
+      a.querySelector("p").textContent = look.sub;
+      tiles.appendChild(a);
     });
+    grid.appendChild(tiles);
   });
 }
 
@@ -587,6 +655,7 @@ async function afterFilesChanged() {
   $("results").innerHTML = "";
   setStatus("");
   renderFileList();
+  if (current.custom) { await startEditor(current, files[0]); return; }
   if (current.organize) await buildPageGrid();
 }
 
@@ -700,8 +769,10 @@ function showResults(outputs, note) {
 }
 
 function openTool(id) {
+  editorReset();
   current = tools.find((t) => t.id === id);
   files = []; pages = []; busy = false;
+  $("run").hidden = !!current.custom;
   $("home").hidden = true;
   $("tool").hidden = false;
   $("tool-title").textContent = current.title;
@@ -716,14 +787,15 @@ function openTool(id) {
   setStatus("");
   renderFileList();
   if (current.setup) current.setup();
-  document.title = current.title + " – PDF Kit Online";
+  document.title = current.title + " – PDF Editor Kit";
 }
 
 function showHome() {
+  editorReset();
   current = null;
   $("tool").hidden = true;
   $("home").hidden = false;
-  document.title = "PDF Kit Online – Free PDF tools, private in your browser";
+  document.title = "PDF Editor Kit – Free PDF tools, private in your browser";
 }
 
 function route() {
