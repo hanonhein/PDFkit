@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extract pages from a PDF: save chosen pages free | PDF Editor Kit</title>
+<meta name="description" content="Extract pages from a PDF into a new file by typing page ranges like 1-3, 5. Free, no sign-up, nothing uploaded.">
+<link rel="canonical" href="https://pdfeditorkit.app/extract-pdf-pages">
+<link rel="icon" href="pdfkit-icon.png">
+<link rel="stylesheet" href="style.css?v=14">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Extract PDF pages – PDF Editor Kit", "url": "https://pdfeditorkit.app/extract-pdf-pages", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "description": "Extract pages from a PDF into a new file by typing page ranges like 1-3, 5. Free, no sign-up, nothing uploaded.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I save only page 5 of a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Choose Custom page ranges, type 5 and click Split. You get a PDF with just that page."}}, {"@type": "Question", "name": "Can I extract several different pages?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Type them with commas, for example 1-3, 7, 10-12. Each range becomes its own PDF."}}, {"@type": "Question", "name": "Is it really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result."}}, {"@type": "Question", "name": "Are my files uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page."}}]}</script>
+</head>
+<body data-tool="split">
+<header class="top">
+  <a class="brand" href="/" aria-label="PDF Editor Kit home">
+    <img src="pdfkit-icon.png" alt="" width="32" height="32">
+    <span>PDF Editor Kit</span>
+  </a>
+  <nav>
+    <a href="/" class="nav-link">All tools</a>
+    <a href="privacy.html" class="nav-link">Privacy</a>
+    <a href="download.html" class="btn small">Download</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME: tool grid -->
+  <section id="home" hidden><div id="grid" class="grid"></div></section>
+
+  <!-- TOOL view -->
+  <section id="tool">
+    <a href="/" class="back">&larr; All tools</a>
+    <h1 id="tool-title">Extract PDF pages</h1>
+    <p id="tool-desc" class="muted"></p>
+
+    <label id="drop" class="drop" tabindex="0">
+      <input id="file-input" type="file" hidden>
+      <strong id="drop-text">Choose files</strong>
+      <span>or drop them here</span>
+    </label>
+
+    <ul id="file-list" class="file-list"></ul>
+    <div id="editor" class="editor" hidden></div>
+    <div id="pages" class="pages"></div>
+    <div id="options" class="options"></div>
+
+    <button id="run" class="btn big" disabled>Go</button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <section class="seo">
+    <h2>About Extract PDF pages</h2>
+    <p>Take only the pages you want out of a PDF. Choose Custom page ranges, type the pages, and each range is saved as its own PDF.</p>
+    <h2>How to use it</h2>
+    <ol><li>Choose your PDF.</li><li>Choose Custom page ranges and type the pages, for example 1-3, 5, 8-10.</li><li>Click Split and download the new files.</li></ol>
+    <h2>Why use PDF Editor Kit</h2>
+    <ul><li>Extract single pages or whole ranges.</li><li>Each range becomes its own file.</li><li>Your PDF is never uploaded.</li></ul>
+    <h2>Questions</h2>
+    <details><summary>How do I save only page 5 of a PDF?</summary><p>Choose Custom page ranges, type 5 and click Split. You get a PDF with just that page.</p></details><details><summary>Can I extract several different pages?</summary><p>Yes. Type them with commas, for example 1-3, 7, 10-12. Each range becomes its own PDF.</p></details><details><summary>Is it really free?</summary><p>Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result.</p></details><details><summary>Are my files uploaded to a server?</summary><p>No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page.</p></details>
+    <h2>More PDF tools</h2>
+    <ul class="related"><li><a href="/split-pdf">Split PDF</a></li><li><a href="/delete-pdf-pages">Delete PDF pages</a></li><li><a href="/merge-pdf">Merge PDF</a></li><li><a href="/">All PDF tools</a></li></ul>
+    <p class="muted">Also available as a free app for Android, Windows and Mac: <a href="/download">see downloads</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Made to run privately in your browser. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="download.html">Download</a> · <a href="licenses.html">Licences</a></p>
+</footer>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/mammoth.browser.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="vendor/html2pdf.bundle.min.js"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/pptxgen.bundle.js"></script>
+<script src="convert.js?v=8"></script>
+<script src="editor.js?v=6"></script>
+<script src="security.js?v=1"></script>
+<script src="app.js?v=15"></script>
+</body>
+</html>

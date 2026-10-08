@@ -786,7 +786,7 @@ function openTool(id) {
   $("run").hidden = !!current.custom;
   $("home").hidden = true;
   $("tool").hidden = false;
-  $("tool-title").textContent = current.title;
+  if (!PAGE_TOOL || !$("tool-title").textContent) $("tool-title").textContent = current.title;
   $("tool-desc").textContent = current.desc;
   $("file-input").accept = current.accept;
   $("file-input").multiple = !!current.multi;

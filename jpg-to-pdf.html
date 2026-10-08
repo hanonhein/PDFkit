@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPG to PDF: turn photos into a PDF free | PDF Editor Kit</title>
+<meta name="description" content="Convert JPG photos to one PDF online for free. Add many pictures, set the order, no sign-up, nothing uploaded.">
+<link rel="canonical" href="https://pdfeditorkit.app/jpg-to-pdf">
+<link rel="icon" href="pdfkit-icon.png">
+<link rel="stylesheet" href="style.css?v=14">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "JPG to PDF – PDF Editor Kit", "url": "https://pdfeditorkit.app/jpg-to-pdf", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "description": "Convert JPG photos to one PDF online for free. Add many pictures, set the order, no sign-up, nothing uploaded.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I make a PDF from JPG pictures?", "acceptedAnswer": {"@type": "Answer", "text": "Add the JPG files, set their order and click the button. You get one PDF with a page for each picture."}}, {"@type": "Question", "name": "Can I do this on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open this page on your phone, choose photos from your gallery and create the PDF."}}, {"@type": "Question", "name": "Is it really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result."}}, {"@type": "Question", "name": "Are my files uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page."}}]}</script>
+</head>
+<body data-tool="img2pdf">
+<header class="top">
+  <a class="brand" href="/" aria-label="PDF Editor Kit home">
+    <img src="pdfkit-icon.png" alt="" width="32" height="32">
+    <span>PDF Editor Kit</span>
+  </a>
+  <nav>
+    <a href="/" class="nav-link">All tools</a>
+    <a href="privacy.html" class="nav-link">Privacy</a>
+    <a href="download.html" class="btn small">Download</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME: tool grid -->
+  <section id="home" hidden><div id="grid" class="grid"></div></section>
+
+  <!-- TOOL view -->
+  <section id="tool">
+    <a href="/" class="back">&larr; All tools</a>
+    <h1 id="tool-title">JPG to PDF</h1>
+    <p id="tool-desc" class="muted"></p>
+
+    <label id="drop" class="drop" tabindex="0">
+      <input id="file-input" type="file" hidden>
+      <strong id="drop-text">Choose files</strong>
+      <span>or drop them here</span>
+    </label>
+
+    <ul id="file-list" class="file-list"></ul>
+    <div id="editor" class="editor" hidden></div>
+    <div id="pages" class="pages"></div>
+    <div id="options" class="options"></div>
+
+    <button id="run" class="btn big" disabled>Go</button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <section class="seo">
+    <h2>About JPG to PDF</h2>
+    <p>Turn JPG photos into a single PDF. Add as many pictures as you like and put them in the order you want. Each picture gets its own page.</p>
+    <h2>How to use it</h2>
+    <ol><li>Choose your JPG photos, or drop them on the page.</li><li>Use the arrows to set the order and pick the page size.</li><li>Click the button and download your PDF.</li></ol>
+    <h2>Why use PDF Editor Kit</h2>
+    <ul><li>Many photos in one PDF.</li><li>You choose the order.</li><li>Your photos stay on your device.</li></ul>
+    <h2>Questions</h2>
+    <details><summary>How do I make a PDF from JPG pictures?</summary><p>Add the JPG files, set their order and click the button. You get one PDF with a page for each picture.</p></details><details><summary>Can I do this on my phone?</summary><p>Yes. Open this page on your phone, choose photos from your gallery and create the PDF.</p></details><details><summary>Is it really free?</summary><p>Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result.</p></details><details><summary>Are my files uploaded to a server?</summary><p>No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page.</p></details>
+    <h2>More PDF tools</h2>
+    <ul class="related"><li><a href="/png-to-pdf">PNG to PDF</a></li><li><a href="/pdf-to-jpg">PDF to images</a></li><li><a href="/merge-pdf">Merge PDF</a></li><li><a href="/images-to-pdf">Images to PDF</a></li><li><a href="/">All PDF tools</a></li></ul>
+    <p class="muted">Also available as a free app for Android, Windows and Mac: <a href="/download">see downloads</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Made to run privately in your browser. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="download.html">Download</a> · <a href="licenses.html">Licences</a></p>
+</footer>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/mammoth.browser.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="vendor/html2pdf.bundle.min.js"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/pptxgen.bundle.js"></script>
+<script src="convert.js?v=8"></script>
+<script src="editor.js?v=6"></script>
+<script src="security.js?v=1"></script>
+<script src="app.js?v=15"></script>
+</body>
+</html>
