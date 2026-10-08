@@ -258,3 +258,14 @@ footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 24
 .ed-pad-msg { color: #ba1a1a; font-weight: 600; min-height: 1.4em; margin: 8px 0 0 !important; }
 @media (prefers-color-scheme: dark) { .ed-pad-msg { color: #ffb4ab; } }
 .ed-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+
+/* ---------- Text under each tool (what it is, how to use it, questions) ---------- */
+.seo { margin-top: 44px; padding-top: 8px; border-top: 1px solid var(--line); line-height: 1.6; }
+.seo h2 { font-size: 1.2rem; margin: 26px 0 8px; }
+.seo p { margin: 0 0 10px; }
+.seo ol, .seo ul { margin: 0 0 10px; padding-left: 22px; }
+.seo li { margin: 4px 0; }
+.seo details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin: 8px 0; }
+.seo summary { cursor: pointer; font-weight: 600; }
+.seo details p { margin: 8px 0 0; color: var(--muted); }
+.seo .related { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }

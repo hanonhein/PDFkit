@@ -563,6 +563,17 @@ function lookOf(t) {
   };
 }
 
+// Each tool has its own page (so search engines can find it). The page address of every tool:
+const TOOL_PAGES = {
+  merge: "merge-pdf", split: "split-pdf", organize: "organize-pdf", compress: "compress-pdf",
+  numbers: "add-page-numbers-to-pdf", watermark: "watermark-pdf", img2pdf: "images-to-pdf", pdf2img: "pdf-to-jpg",
+  pdf2word: "pdf-to-word", pdf2excel: "pdf-to-excel", pdf2ppt: "pdf-to-powerpoint", word2pdf: "word-to-pdf",
+  excel2pdf: "excel-to-pdf", ppt2pdf: "powerpoint-to-pdf", edit: "edit-pdf", sign: "sign-pdf",
+  protect: "protect-pdf", unlock: "remove-pdf-password",
+};
+// On a tool page (like /merge-pdf) the body says which tool it is
+const PAGE_TOOL = document.body.dataset.tool || "";
+
 function buildGrid() {
   const grid = $("grid");
   // Every tool is a big tile (like the Mac app home screen), grouped under a small heading
@@ -579,7 +590,7 @@ function buildGrid() {
       const look = lookOf(t);
       const a = document.createElement("a");
       a.className = "card";
-      a.href = "#" + t.id;
+      a.href = TOOL_PAGES[t.id] ? "/" + TOOL_PAGES[t.id] : "#" + t.id;
       a.innerHTML = '<div class="ico ' + look.color + '">' + look.svg + "</div><div><h3></h3><p></p></div>";
       a.querySelector("h3").textContent = t.title;
       a.querySelector("p").textContent = look.sub;
@@ -787,7 +798,7 @@ function openTool(id) {
   setStatus("");
   renderFileList();
   if (current.setup) current.setup();
-  document.title = current.title + " – PDF Editor Kit";
+  if (!PAGE_TOOL) document.title = current.title + " – PDF Editor Kit";
 }
 
 function showHome() {
@@ -799,6 +810,7 @@ function showHome() {
 }
 
 function route() {
+  if (PAGE_TOOL) { if (!current) openTool(PAGE_TOOL); return; } // a tool page always shows its own tool
   const id = location.hash.replace("#", "");
   if (tools.some((t) => t.id === id)) openTool(id);
   else showHome();

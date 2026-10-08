@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit PDF online free: draw, highlight, add text | PDF Editor Kit</title>
+<meta name="description" content="Edit a PDF online for free: draw, highlight, erase and add text. No sign-up, and your file stays on your device.">
+<link rel="canonical" href="https://pdfeditorkit.app/edit-pdf">
+<link rel="icon" href="pdfkit-icon.png">
+<link rel="stylesheet" href="style.css?v=14">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Edit PDF – PDF Editor Kit", "url": "https://pdfeditorkit.app/edit-pdf", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "description": "Edit a PDF online for free: draw, highlight, erase and add text. No sign-up, and your file stays on your device.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I add text to a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Open the PDF here, choose the text tool, click on the page and type. Then save the PDF."}}, {"@type": "Question", "name": "Can I change the original words in a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "This tool adds drawings, highlights and text on top of the page. It does not rewrite the original text."}}, {"@type": "Question", "name": "Is it really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result."}}, {"@type": "Question", "name": "Are my files uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page."}}]}</script>
+</head>
+<body data-tool="edit">
+<header class="top">
+  <a class="brand" href="/" aria-label="PDF Editor Kit home">
+    <img src="pdfkit-icon.png" alt="" width="32" height="32">
+    <span>PDF Editor Kit</span>
+  </a>
+  <nav>
+    <a href="/" class="nav-link">All tools</a>
+    <a href="privacy.html" class="nav-link">Privacy</a>
+    <a href="download.html" class="btn small">Download</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME: tool grid -->
+  <section id="home" hidden><div id="grid" class="grid"></div></section>
+
+  <!-- TOOL view -->
+  <section id="tool">
+    <a href="/" class="back">&larr; All tools</a>
+    <h1 id="tool-title">Edit PDF</h1>
+    <p id="tool-desc" class="muted"></p>
+
+    <label id="drop" class="drop" tabindex="0">
+      <input id="file-input" type="file" hidden>
+      <strong id="drop-text">Choose files</strong>
+      <span>or drop them here</span>
+    </label>
+
+    <ul id="file-list" class="file-list"></ul>
+    <div id="editor" class="editor" hidden></div>
+    <div id="pages" class="pages"></div>
+    <div id="options" class="options"></div>
+
+    <button id="run" class="btn big" disabled>Go</button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <section class="seo">
+    <h2>About Edit PDF</h2>
+    <p>Draw, highlight, sign and add text to a PDF. Everything happens in your browser, and your file stays on your device.</p>
+    <h2>How to use it</h2>
+    <ol><li>Choose your PDF.</li><li>Pick a tool: pen, highlight, text or eraser, and a colour.</li><li>Click Save PDF and download your edited file.</li></ol>
+    <h2>Why use PDF Editor Kit</h2>
+    <ul><li>Pen, highlighter, text, eraser and undo.</li><li>Move or delete anything you added.</li><li>Your PDF is never uploaded.</li></ul>
+    <h2>Questions</h2>
+    <details><summary>How do I add text to a PDF?</summary><p>Open the PDF here, choose the text tool, click on the page and type. Then save the PDF.</p></details><details><summary>Can I change the original words in a PDF?</summary><p>This tool adds drawings, highlights and text on top of the page. It does not rewrite the original text.</p></details><details><summary>Is it really free?</summary><p>Yes. There is no sign-up, no limit on how many files you use and no watermark added to your result.</p></details><details><summary>Are my files uploaded to a server?</summary><p>No. This tool runs inside your browser, so your file never leaves your device. You can read the details on the privacy page.</p></details>
+    <h2>More PDF tools</h2>
+    <ul class="related"><li><a href="/sign-pdf">Sign PDF</a></li><li><a href="/watermark-pdf">Watermark</a></li><li><a href="/organize-pdf">Organize pages</a></li><li><a href="/">All PDF tools</a></li></ul>
+    <p class="muted">Also available as a free app for Android, Windows and Mac: <a href="/download">see downloads</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Made to run privately in your browser. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="download.html">Download</a> · <a href="licenses.html">Licences</a></p>
+</footer>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="vendor/mammoth.browser.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="vendor/html2pdf.bundle.min.js"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/pptxgen.bundle.js"></script>
+<script src="convert.js?v=8"></script>
+<script src="editor.js?v=6"></script>
+<script src="security.js?v=1"></script>
+<script src="app.js?v=14"></script>
+</body>
+</html>

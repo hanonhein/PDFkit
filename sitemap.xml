@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://pdfeditorkit.app/</loc></url>
   <url><loc>https://pdfeditorkit.app/download</loc></url>
+  <url><loc>https://pdfeditorkit.app/merge-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/split-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/organize-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/compress-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/add-page-numbers-to-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/watermark-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/images-to-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/pdf-to-jpg</loc></url>
+  <url><loc>https://pdfeditorkit.app/pdf-to-word</loc></url>
+  <url><loc>https://pdfeditorkit.app/pdf-to-excel</loc></url>
+  <url><loc>https://pdfeditorkit.app/pdf-to-powerpoint</loc></url>
+  <url><loc>https://pdfeditorkit.app/word-to-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/excel-to-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/powerpoint-to-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/edit-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/sign-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/protect-pdf</loc></url>
+  <url><loc>https://pdfeditorkit.app/remove-pdf-password</loc></url>
   <url><loc>https://pdfeditorkit.app/privacy</loc></url>
   <url><loc>https://pdfeditorkit.app/terms</loc></url>
   <url><loc>https://pdfeditorkit.app/licenses</loc></url>
